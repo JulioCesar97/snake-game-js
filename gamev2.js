@@ -5,11 +5,10 @@
 //////////////////////////////////
 
 
-
 //vai buscar o object html 'Canvas'
-var canvas  = document.getElementById('myCanvas');
+var canvas  = null;
 //vai buscar context 2d do canvas
-var ctx     = canvas.getContext('2d');
+var ctx     = null;
 //Teclas de Controle
 var keys    = {
   y: -1, x: 0
@@ -18,21 +17,25 @@ var keys    = {
 var snake   = {
   y: 5,
   x: 9,
-  tail: [{y:0,x:0}],
+  tail: [],
   eat: 0
 }
 //Posicao aleatoria da maca
 var randomLocation = 0;
 
 var options = {
-  canvasW: 400,
-  canvasH: 400,
+  cvW: 400,
+  cvH: 400,
   scl: 20,
-  time: 1000
+  time: 80
 }
 
 function setup(){
 
+  //vai buscar o object html 'Canvas'
+  canvas = document.getElementById(options.canvasID);
+  //vai buscar context 2d do canvas
+  ctx = canvas.getContext('2d');
   //muda a cor de fundo do canvas
   canvas.style.background = '#000';
 
@@ -45,14 +48,20 @@ function setup(){
 }
 
 function start( opt = {} ){
-  gameOptions(opt);
-  //chama a funcao setup
-  setup();
-  //chama a funcao drawLoop a cada o tempo inserido neste caso e de 1s
-  setInterval(function(){
-    drawLoop();
-  }, options.time);
 
+
+  if( opt.hasOwnProperty('canvasID') && document.getElementById(opt.canvasID) ){
+
+    gameOptions(opt);
+    //chama a funcao setup
+    setup();
+    //chama a funcao drawLoop a cada o tempo inserido neste caso e de 1s
+    setInterval(function(){
+      drawLoop();
+    }, options.time);
+  }else{
+    alert('Necesita do ID do Canvas!');
+  }
 
 }
 
@@ -147,7 +156,6 @@ function createApple(){
 
 
 function gameOptions(opt){
-    console.log('Options: OK');
 
   if( opt.hasOwnProperty('time') ){
     options.time = opt.time;
@@ -171,6 +179,9 @@ function gameOptions(opt){
     options.cvW = opt.canvasW;
     options.cvH = opt.canvasH;
   }
+
+  options.canvasID = opt.canvasID;
+
 
 }
 

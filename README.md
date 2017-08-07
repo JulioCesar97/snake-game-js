@@ -1,6 +1,5 @@
 # snake-game-js 
-[GitHub release](https://img.shields.io/github/release/juliogomes97/game.js.svg)
-[Build Status](https://api.travis-ci.org/juliogomes97/animate.css.svg?branch=master)
+
 SnakeGame - JavaScript
 
 Objetos Obrigatorios
